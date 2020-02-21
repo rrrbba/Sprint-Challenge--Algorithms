@@ -96,8 +96,18 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        
+        # Can only sort when light is on**, so turn light on, possible bubble sort?
+        #compare the items first, if one on left is larger than right then swap them
+
+        self.set_light_on()
+
+        while self.set_light_on(): 
+            self.set_light_off()
+
+
+
+        
 
 
 if __name__ == "__main__":
