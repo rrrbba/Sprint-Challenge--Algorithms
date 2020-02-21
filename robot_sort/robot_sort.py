@@ -96,8 +96,41 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        
+        # Can only sort when light is on**, so turn light on, possible bubble sort?
+        #compare the items first, if one on left is larger than right then swap them
+
+        self.set_light_on()
+
+        while self.light_is_on() == True: #while light is on
+            self.set_light_off() #like setting to false with the bubble sort initially
+
+            while self.can_move_right(): #while it can move right
+                self.swap_item() #pick up item 
+                self.move_right() #and move right
+                if self.compare_item() == 1: #if when comparing the items while moving right the held item value is greater than the value in front of it
+                    self.swap_item() #swap
+                    self.set_light_on() #and turn light on
+                self.move_left() #moves to left drop smaller item in empty spot
+                self.swap_item() #drops item
+
+                self.move_right() #keeps robot going to the right to keep comparing
+            
+            while self.can_move_left(): #while it can move left
+                self.swap_item() #pick up item
+                self.move_left() #and move left
+                if self.compare_item() == -1: #when comparing and item held is less than the value in front of it
+                    self.swap_item() #swap them
+                    self.set_light_on() #and light turns on
+                self.move_right() #moves to right drop larger item in empty spot
+                self.swap_item() #drops item
+
+                self.move_left() #keeps going to the left to keep comparing
+            
+        
+        return self._list #return sorted list
+
+        
 
 
 if __name__ == "__main__":
