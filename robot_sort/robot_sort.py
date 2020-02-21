@@ -102,10 +102,33 @@ class SortingRobot:
 
         self.set_light_on()
 
-        while self.set_light_on(): 
-            self.set_light_off()
+        while self.light_is_on() == True: #while light is on
+            self.set_light_off() #like setting to false with the bubble sort initially
 
+            while self.can_move_right(): #while it can move right
+                self.swap_item() #pick up item 
+                self.move_right() #and move right
+                if self.compare_item() == 1: #if when comparing the items while moving right the held item value is greater than the value in front of it
+                    self.swap_item() #swap
+                    self.set_light_on() #and turn light on
+                self.move_left() #moves to left drop smaller item
+                self.swap_item()
 
+                self.move_right() #keeps robot going to the right
+            
+            while self.can_move_left(): #while it can move left
+                self.swap_item() #pick up item
+                self.move_left() #and move left
+                if self.compare_item() == -1: #when comparing and item item held is less than the value in front of it
+                    self.swap_item() #swap them
+                    self.set_light_on() #and light turns on
+                self.move_right() #moves to right drop larger item
+                self.swap_item()
+
+                self.move_left() #keeps going to the left
+            
+        
+        return self._list #return sorted list
 
         
 
